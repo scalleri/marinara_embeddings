@@ -167,7 +167,7 @@ $ python3
 >>> model.most_similar('Digitalisierung')
 [('Langzeitarchivierung', 0.8689799904823303), ('digital', 0.840603768825531), ('Bildplatte', 0.8246514797210693), ('multimedialen', 0.8082578182220459), ('Sammelauftrag', 0.8074219822883606), ('filmisch', 0.8007779717445374), ('Fernsehfilm', 0.8005862236022949), ('Computerspiel', 0.7991310358047485), ('Radiobereich', 0.7987841367721558), ('Spartenprogramm', 0.794711709022522)]
 
--> Zeigt die top 10 NN von 'Digitalisierung' an, inkl. Cosinus Distanz 
+-> Zeigt die top 10 NN von 'Digitalisierung' an, inkl. Cosinus Ähnlichkeit 
 
 >>> model.most_similar('Person',topn=100)
 # topn=INT -> anzahl der NN, die man sich anzeigenlassen will. 

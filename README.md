@@ -5,7 +5,6 @@
 pip install gensim
 pip install tensorflow
 mkdir embedding_models
-
 ```
 
 

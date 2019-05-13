@@ -2,6 +2,7 @@
 # Wordembeddings and NGrams
 
 ```
+pip install numpy
 pip install gensim
 pip install tensorflow
 mkdir embedding_models

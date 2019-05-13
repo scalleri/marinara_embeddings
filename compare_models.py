@@ -13,6 +13,7 @@ import cufflinks as cf
 parser = argparse.ArgumentParser(description='Compare cosine similarity of two models')
 parser.add_argument('-m1','--model1',help='path of the first model to use')
 parser.add_argument('-m2','--model2',help='path of the second model to use')
+parser.add_argument('-o','--outfile',help='path of the output csv file')
 
 
 args = parser.parse_args()
@@ -123,11 +124,11 @@ def main():
 	df = pd.DataFrame.from_dict(word_stats,orient="index")
 	df.sort_values('pnn_dist_in_sbz',ascending=False)
 	df = df.dropna(thresh=10)
-	df.to_csv('march_orient_pines.csv',sep="\t",encoding="utf-8")
-	#df = pd.read_csv('v3_pi_vs_sbz.csv',sep="\t",encoding="utf-8")
+	df.to_csv(args.outfile,sep="\t",encoding="utf-8")
+	
 	
 
-	#visualize_models(df)
+	visualize_models(df)
 
 
 

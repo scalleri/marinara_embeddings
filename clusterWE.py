@@ -48,9 +48,6 @@ for i, word in enumerate(words):
 	#print(center_word)
 	f.write(word + "\t" + str(labels[i])+"\t"+str(center_word[0][0])+"\t"+str(center_word[0][1])+"\t"+str(center_word[1][0])+"\t"+str(center_word[1][1])+"\t"+str(center_word[2][0])+"\t"+str(center_word[2][1])+"\n")
 
-with open(modelname+'kmeans_model.sav','w') as out_dump:
-	pickle.dump(kmeans,out_dump)
-
 
 
 

@@ -1,7 +1,13 @@
-# n\_hot\_embeddings
 
 # Wordembeddings and NGrams
-Das ist eine eher allgemeine Erklärung für die verschiedenen Pythonscripts, unter `docs/` hat es noch zu den projektspeziefischeren Experimenten Erklärungen. 
+
+```
+pip install gensim
+pip install tensorflow
+mkdir embedding_models
+
+```
+
 
 ## Wordembeddings berechnen
 
@@ -126,7 +132,7 @@ Mit dem Code `visualize_we.py` können die berechneten Modelle gleichzeitig visu
 Damit Tensorboard auf die Modelle zugreifen kann muss die Visualisierung gestartet werden.
 Mit dem Befehl:
 ```
-tensorboard --logdir="tensorboard_test/" --port 8083
+tensorboard --logdir="tensorboard_test/" --port [SET PORT]
 ```
 
 kann die Visualisierung gestartet werden. 
@@ -134,16 +140,10 @@ kann die Visualisierung gestartet werden.
 Idealerweise startet man die Visualisierung in nohup, damit das tensorboard aktiv bleibt auch wenn man sich ausloggt:
 
 ```
-$ nohup tensorboard --logdir="tensorboard_test/" --port 8083 &
+$ nohup tensorboard --logdir="tensorboard_test/" --port [SET PORT] &
 ```
 
 
-
-### Mehrere Modelle in den gleichen Raum projezieren
-
-Das Script `multi_visualize.py` ermöglicht es mehrere WE-Modelle in den gleichen Raum zu projezieren. Alle Modelle müssen im gleichen Ordner abgelegt sein. Die maximale Grösse ist auf 100'000 Wörter beschränkt, da sonst die Visualisierung nicht funktioniert. Damit alle Modelle gleich vorhanden sind werden die top n (n = 100k/Anzahl Modelle) Wörter aus dem Vocab jeweils visualisiert. Die Wörter bekommen jeweils ein Label mit dem Korpus/Modell dem sie angehören. 
-
--> Funktioniert, ist aber nicht wirklich sinnvoll 
 
 ### Modelle vergleichen Wort für Wort
 
@@ -157,7 +157,6 @@ vgl. `docs/populismus experiments.md` für mehr Infos.
 ### Wordembeddings abfragen 
 
 Im Terminal den python3 interpreter starten: (das $-Zeichen zeigt eine Terminal eingabe an, muss nicht abgetippt werden)
-Die meisten Embeddingmodelle liegen unter: `/home/call/n_hot_embeddings/embedding_models/`
 
 Voraussetzung ist die Installation von gensim (https://radimrehurek.com/gensim/install.html) (normalerweise: pip3 install gensim/pip install gensim)
 ```
@@ -179,32 +178,4 @@ um den Interprerter zu beenden:
 Unter https://radimrehurek.com/gensim/models/keyedvectors.html hat es gute Beispiele für andere mögliche Abfragen mit gensim 
 
 
-
-## GermaNet Anbindung
-
-Die GermaNet DB ist über die Python Library `pygermanet` abfragbar und kann folgendermassen importiert werden:
-
-```
->>> from pygermanet import load_germanet
->>> gn = load_germanet()
-```
-
-GermaNet basiert auf der Wordnet-Struktur (siehe [WordNet](https://wordnet.princeton.edu)) und ist aus Synsets aufgebaut. Die Synsets bilden synonimische Beziehungen ab. Diese Synsets sind mit anderen über 'conceptual relations' verbunden. Ein Beispiel wie Hypo- und Hyperonyme abgefragt werden:
-
-```
->>> gn.synsets('Energie') 
-[Synset(Energie.n.1), Synset(Tatkraft.n.1)]
-
-\# damit die spezifischen Hypero-/Hyponyme abgefragt werden können muss ein jeweiliges Synset von Energie, in diesem Beispiel 'Energie.n.1' ausgewählt werden. Der Einfachheit halber wird es der Variabel 'energie' zugewiesen.
-
->>> energie = gn.synset('Energie.n.1')
->>> energie.hyponyms
-[Synset(Höhenenergie.n.1), Synset(Primärenergie.n.1), Synset(Heizenergie.n.1), Synset(Wärme.n.2), Synset(Haftenergie.n.1), Synset(Reibungsenergie.n.1), Synset(Elektrizität.n.1), Synset(Bewegungsenergie.n.1), Synset(Alternativenergie.n.1), Synset(Arbeit.n.1), Synset(Energiespektrum.n.1), Synset(Bindungsenergie.n.1), Synset(Lebensenergie.n.1), Synset(Aktivierungsenergie.n.1), Synset(Gesamtenergie.n.1), Synset(Strahlungsenergie.n.1), Synset(Energieniveau.n.1), Synset(Lichtenergie.n.1), Synset(Antriebsenergie.n.1), Synset(Schallenergie.n.1), Synset(Vakuumenergie.n.1), Synset(Reliefenergie.n.1), Synset(Strömungsenergie.n.1), Synset(Oberflächenenergie.n.1), Synset(Ruheenergie.n.1)]
->>> energie.hypernym_paths
-[[Synset(GNROOT.n.1), Synset(Zustand.n.1), Synset(Situation.n.1), Synset(Ereignis.n.1), Synset(Erscheinung.n.2), Synset(natürliches Phänomen.n.1), Synset(physikalisches Phänomen.n.1), Synset(Energie.n.1)]]
-
-# zeigt alle Relationen des Synsets an. 
->>> energie.rels()
-
-```
 
